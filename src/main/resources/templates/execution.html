@@ -49,13 +49,17 @@
             <div th:if="${#strings.contains(#authentication.principal.authorities,'USER')}" class="form-group">
                 <label for="select">Select command from list</label>
                 <select th:field="*{cmdName}" id="select" class="selectpicker">
-                    <option value="chcp">chcp</option>
-                    <option value="dir">dir</option>
-                    <option value="tree">tree</option>
+                    <option value="arch">arch</option>
+                    <option value="date">date</option>
+                    <option value="ls -l">ls -l</option>
+                    <option value="free -m">free -m</option>
+                    <option value="route -n">route -n</option>
+                    <option value="pstree">pstree</option>
+
                 </select>
             </div>
-                <button type="submit" class="btn btn-success customBtn" value="Execute">Execute</button>
-                <button type="reset" class="btn btn-default customBtn"  value="Reset">Reset</button>
+                <button type="execute" class="btn btn-success customBtn" value="Execute">Execute</button>
+                <button th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN')}" type="reset" class="btn btn-default customBtn"  value="Reset">Reset</button>
         </form>
         </div>
     </div>
