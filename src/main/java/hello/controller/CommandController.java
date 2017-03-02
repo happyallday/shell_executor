@@ -48,7 +48,7 @@ public class CommandController {
         ArrayList<String> result = new ArrayList<>();
         try {
             String line;
-            Process cmdProc = Runtime.getRuntime().exec("/bin/bash -c " + commandName);
+            Process cmdProc = Runtime.getRuntime().exec(commandName);
 
 
             BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(
