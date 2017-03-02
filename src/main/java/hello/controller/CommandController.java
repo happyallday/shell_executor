@@ -47,7 +47,7 @@ public class CommandController {
             //Вызываем переданную команду, по умолчанию 'help'
         String line;
         ArrayList<String> result = new ArrayList<>();
-        Process cmdProc = Runtime.getRuntime().exec("cmd.exe /c " + commandName);
+        Process cmdProc = Runtime.getRuntime().exec(commandName);
 
 
         BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(
