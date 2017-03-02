@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Command Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+
+    <link href="../static/css/main.css"
+          th:href="@{css/main.css}" rel="stylesheet" media="screen"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"
+          rel="stylesheet" media="screen"/>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="col-lg-2 col-lg-offset-5 cmdName">
+            <h4><a class="customA" href="/">Shell Executor</a></h4>
+        </div>
+        <div class="col-lg-1 col-lg-offset-4">
+            <form th:action="@{/logout}" method="post">
+                <input class="btn btn-danger customBtn" type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid customContainer">
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-5">
+        <form action="#" th:action="@{/}" th:object="${cmd}" method="post" role="form">
+            <div th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN')}" class="form-grop">
+                <label for="text">Command</label>
+                <input class="form-control" placeholder="Enter a command" id="text" type="text" th:field="*{cmdName}" />
+            </div>
+            <div th:if="${#strings.contains(#authentication.principal.authorities,'USER')}" class="form-group">
+                <label for="select">Select command from list</label>
+                <select th:field="*{cmdName}" id="select" class="selectpicker">
+                    <option value="chcp">chcp</option>
+                    <option value="dir">dir</option>
+                    <option value="tree">tree</option>
+                </select>
+            </div>
+                <button type="submit" class="btn btn-success customBtn" value="Execute">Execute</button>
+                <button type="reset" class="btn btn-default customBtn"  value="Reset">Reset</button>
+        </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

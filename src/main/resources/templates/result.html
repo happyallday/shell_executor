@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Command execution result</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+              th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+              rel="stylesheet" media="screen" />
+
+        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+                th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+        <link href="../static/css/main.css"
+              th:href="@{css/main.css}" rel="stylesheet" media="screen"/>
+    </head>
+    <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="col-lg-2 col-lg-offset-5 cmdName">
+                <h4><a class="customA" href="/">Shell Executor</a></h4>
+            </div>
+            <div class="col-lg-1 col-lg-offset-4">
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger customBtn" type="submit" value="Sign Out"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid customContainer">
+
+        <div class="row customRow">
+            <div class="col-lg-2 col-lg-offset-5 cmdName"><a class="btn customBtn btn-default" role="button" href="/">Execute another command</a></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading cmdName" th:text="'Command: ' + ${cmd.cmdName}">Заголовок</div>
+                    <div class="panel-body">
+                        <table>
+                            <tr th:each="line : ${cmd.cmdResult}">
+                                <td th:text="${line}">1</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+.customContainer{
+    padding-top: 70px;
+}
+
+.customForm{
+    padding-top: 60px;
+}
+
+.customBtn{
+    padding: 2px 8px;
+    margin-top: 10px;
+}
+
+.cmdName{
+    text-align: center;
+}
+
+.customA{
+    color: #ffffff;
+}
+
+a.customA:focus, a.customA:hover {
+    color: #aeaeae;
+    text-decoration: none;
+}
+.white{
+    color: #ffffff;;
+}
+
+.message{
+    padding-top: 10px;
+}
+
+.customRow{
+    margin-top: -15px;
+    padding-bottom: 15px;
+}
+
+.paddingtop5{
+    padding-top: 5px;
+}
