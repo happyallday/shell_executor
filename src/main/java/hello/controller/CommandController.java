@@ -45,30 +45,35 @@ public class CommandController {
     private ArrayList<String> executeCommand(String commandName) throws IOException{
 
             //Вызываем переданную команду, по умолчанию 'help'
-        String line;
         ArrayList<String> result = new ArrayList<>();
-        Process cmdProc = Runtime.getRuntime().exec(commandName);
+        try {
+            String line;
+            Process cmdProc = Runtime.getRuntime().exec(/*"/bin/bash -c " +*/ commandName);
 
 
-        BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(
-                cmdProc.getInputStream(), Charset.forName("CP866")));
+            BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(
+                    cmdProc.getInputStream(), Charset.forName("UTF-8")));
             //получаем stdout
-        while ((line = stdoutReader.readLine()) != null) {
-            result.add(line);
-        }
-        stdoutReader.close();
+            while ((line = stdoutReader.readLine()) != null) {
+                result.add(line);
+            }
+            stdoutReader.close();
 
 
             //если возникла ошибка, stdout будет пустой, получаем stderr
-        if (result.isEmpty()){
-            BufferedReader srterrReader = new BufferedReader(new InputStreamReader(
-                    cmdProc.getErrorStream(), Charset.forName("CP866")));
+            if (result.isEmpty()) {
+                BufferedReader srterrReader = new BufferedReader(new InputStreamReader(
+                        cmdProc.getErrorStream(), Charset.forName("UTF-8")));
 
-            while ((line = srterrReader.readLine()) != null) {
+                while ((line = srterrReader.readLine()) != null) {
                     // process procs error output here
-                result.add(line);
+                    result.add(line);
+                }
+                srterrReader.close();
             }
-            srterrReader.close();
+        }
+        catch (Exception e){
+            result.add("oops, illegal command");
         }
 
         return result;
